@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+
+  redis:
+    image: 'redis:latest'
+    volumes:
+      - redis_data:/data
+    command: >
+      sh -c "
+      redis-server --protected-mode no --notify-keyspace-events Ex --appendonly yes
+      "
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+
+  message-scheduler-1:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: message-scheduler-1
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3000:3000'
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - APP_SERVER_UNIQUE_NAME=app_server_1
+    depends_on:
+      - redis
+
+  message-scheduler-2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: message-scheduler-2
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3001:3000'
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - APP_SERVER_UNIQUE_NAME=app_server_2
+    depends_on:
+      - redis
+
+  message-scheduler-3:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: message-scheduler-3
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3002:3000'
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - APP_SERVER_UNIQUE_NAME=app_server_3
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
