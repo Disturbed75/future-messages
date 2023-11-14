@@ -14,7 +14,7 @@ Ensure you have the following installed on your machine:
 1. Clone the repository:
 
     ```bash
-    git clone https://github.com/yourusername/your-project.git
+    git clone https://github.com/Disturbed75/future-messages.git
     ```
 
 2. Change into the project directory:
@@ -27,7 +27,7 @@ Ensure you have the following installed on your machine:
 3. Build and start the Docker containers:
 
     ```bash
-    docker-compose up -d
+    docker-compose up
     ```
 
 4. Schedule your message using POST [http://localhost:3000/api/scheduled-messages](App servers are launched at 3000, 3001, 3002 ports)
