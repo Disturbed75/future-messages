@@ -9,6 +9,10 @@ Ensure you have the following installed on your machine:
 - Docker
 - Docker Compose
 
+## ⚠️ Important ⚠️
+
+**This solution works only with single-node Redis. It won't work with Redis cluster**
+
 ## Getting Started
 
 1. Clone the repository:
